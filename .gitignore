@@ -3,5 +3,5 @@ Backend/.venv
 
 Backend/.env
 
-Backend/*.pyc
-
+*.pyc
+__pycache__/
