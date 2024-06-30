@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ShoppingList.apps.ShoppinglistConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
