@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ShoppingList.apps.ShoppinglistConfig',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'Accounts'
 ]
 
 MIDDLEWARE = [
