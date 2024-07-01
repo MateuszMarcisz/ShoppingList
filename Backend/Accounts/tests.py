@@ -1,3 +1,59 @@
-from django.test import TestCase
+from django.test import TestCase, Client
+from django.urls import reverse
 
-# Create your tests here.
+import pytest
+
+
+@pytest.mark.django_db
+def test_registration_view():
+    client = Client()
+    url = reverse('user-register')
+    data = {
+        "username": "test",
+        "password": "test",
+        "email": "test@example.com"
+    }
+    response = client.post(url, data)
+    assert response.status_code == 201
+
+
+@pytest.mark.django_db
+def test_login_view(user):
+    client = Client()
+    url = reverse('user-login')
+    data = {
+        "username": "test user",
+        "password": "test password",
+    }
+    response = client.post(url, data)
+    assert response.status_code == 200
+    assert 'token' in response.json()
+    # print(response.json())
+
+
+@pytest.mark.django_db
+def test_login_view_wrong_password(user):
+    client = Client()
+    url = reverse('user-login')
+    data = {
+        "username": "test user",
+        "password": "wrong password",
+    }
+    response = client.post(url, data)
+    assert response.status_code == 400
+    assert 'non_field_errors' in response.json()
+    assert 'Unable to log in with provided credentials.' in response.json()['non_field_errors']
+
+
+@pytest.mark.django_db
+def test_login_view_wrong_user(user):
+    client = Client()
+    url = reverse('user-login')
+    data = {
+        "username": "wrong user",
+        "password": "test password",
+    }
+    response = client.post(url, data)
+    assert response.status_code == 400
+    assert 'non_field_errors' in response.json()
+    assert 'Unable to log in with provided credentials.' in response.json()['non_field_errors']
