@@ -75,7 +75,7 @@ def test_shopping_list_create_empty_required_field_user(user):
 
 
 @pytest.mark.django_db
-def test_shopping_list_create_empty_required_field_user(user):
+def test_shopping_list_create_empty_required_field_name(user):
     client = Client()
     client.force_login(user)
     url = reverse('shoppinglist-list-create')
