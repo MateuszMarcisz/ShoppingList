@@ -26,7 +26,7 @@ def shopping_lists(user):
 
 @pytest.fixture
 def one_shopping_list(user):
-    ShoppingList.objects.create(
+    return ShoppingList.objects.create(
             name='testing list',
             user=user
         )
