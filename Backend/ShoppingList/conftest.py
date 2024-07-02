@@ -1,7 +1,7 @@
 import pytest
 from django.contrib.auth.models import User
 
-from ShoppingList.models import ShoppingList
+from ShoppingList.models import ShoppingList, Item
 
 
 @pytest.fixture
@@ -31,3 +31,23 @@ def one_shopping_list(user):
             user=user
         )
 
+
+@pytest.fixture
+def items(one_shopping_list):
+    lst = []
+    for i in range(10):
+        lst.append(Item.objects.create(
+            name=f'item {i}',
+            shopping_list=one_shopping_list,
+            quantity=i
+        ))
+    return lst
+
+
+@pytest.fixture
+def one_item(one_shopping_list):
+    return Item.objects.create(
+        name='test item',
+        shopping_list=one_shopping_list,
+        quantity=2
+    )
