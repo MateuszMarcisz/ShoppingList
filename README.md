@@ -21,6 +21,21 @@ Additionally, manual tests were performed using Postman to validate various requ
 ## Frontend
 Once I learn either React, Angular or Vue I will start working on the Frontend part of the app.
 
+### Technologies
+TBD
+
+### Tests
+TBD
+
+## Setup
+<i>This project will be packaged into Docker once both the backend and frontend are complete. For now, to use the backend part, follow the instructions below.</i>
+
+<i>Note: All endpoints require the user to be logged in (except for registration and login), so you need to use either curl or Postman to interact with them.</i>
+
+1. Clone the repository.
+2. Change `.env.example` name to `.env` and make needed adjustments.
+3. Set up your DB.
+4. Run the command `python manage.py runserver` and have fun.
 
 ## License
 You are free to use, modify, and distribute this application for your private, personal use.
