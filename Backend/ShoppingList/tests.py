@@ -13,7 +13,7 @@ def test_shopping_list_get(shopping_lists, user):
     client.force_login(user)
     url = reverse('shoppinglist-list-create')
     response = client.get(url)
-    assert response.status_code == 200
+    assert response.status_code == status.HTTP_200_OK
     # print(response.json())
 
 
@@ -22,7 +22,7 @@ def test_shopping_list_get_not_auth(shopping_lists):
     client = Client()
     url = reverse('shoppinglist-list-create')
     response = client.get(url)
-    assert response.status_code == 401
+    assert response.status_code == status.HTTP_401_UNAUTHORIZED
     # print(response.json())
     assert 'detail' in response.json()
     assert response.json().get('detail') == 'Authentication credentials were not provided.'
@@ -39,7 +39,7 @@ def test_shopping_list_create(user):
     }
     initial_count = ShoppingList.objects.count()
     response = client.post(url, data)
-    assert response.status_code == 201
+    assert response.status_code == status.HTTP_201_CREATED
     assert ShoppingList.objects.count() == initial_count + 1
     # print(response.json())
 
@@ -54,7 +54,7 @@ def test_shopping_list_create_not_auth(user):
     }
     initial_count = ShoppingList.objects.count()
     response = client.post(url, data)
-    assert response.status_code == 401
+    assert response.status_code == status.HTTP_401_UNAUTHORIZED
     assert ShoppingList.objects.count() == initial_count
     assert 'detail' in response.json()
     assert response.json().get('detail') == 'Authentication credentials were not provided.'
@@ -71,7 +71,7 @@ def test_shopping_list_create_empty_required_field_user(user):
     }
     initial_count = ShoppingList.objects.count()
     response = client.post(url, data)
-    assert response.status_code == 400
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
     assert ShoppingList.objects.count() == initial_count
     assert "This field is required." in response.json()['user']
     # print(response.json())
@@ -87,7 +87,7 @@ def test_shopping_list_create_empty_required_field_name(user):
     }
     initial_count = ShoppingList.objects.count()
     response = client.post(url, data)
-    assert response.status_code == 400
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
     assert ShoppingList.objects.count() == initial_count
     assert "This field is required." in response.json()['name']
     # print(response.json())
@@ -99,8 +99,7 @@ def test_shopping_list_detail_get(user, one_shopping_list):
     client.force_login(user)
     url = reverse('shoppinglist-detail', kwargs={'pk': one_shopping_list.pk})
     response = client.get(url)
-    assert response.status_code == 200
-    assert response.status_code == status.HTTP_200_OK  # can be also done like this
+    assert response.status_code == status.HTTP_200_OK
     # print(response.json())
 
 
@@ -241,7 +240,7 @@ def test_item_list_create(user, one_shopping_list):
     }
     initial_count = Item.objects.count()
     response = client.post(url, data)
-    assert response.status_code == 201
+    assert response.status_code == status.HTTP_201_CREATED
     assert Item.objects.count() == initial_count + 1
     # print(response.json())
 
