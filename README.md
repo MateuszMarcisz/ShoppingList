@@ -33,7 +33,7 @@ TBD
 <i>Note: All endpoints require the user to be logged in (except for registration and login), so you need to use either curl or Postman to interact with them.</i>
 
 1. Clone the repository.
-2. Set up virtual environment `python venv .venv` and install dependencies `pip install -r requirements.txt`.
+2. Set up virtual environment `python -m venv .venv`, activate it `source .venv/bin/activate ` and install dependencies `pip install -r requirements.txt`.
 3. Change `.env.example` name to `.env` and make needed adjustments.
 4. Set up your DB.
 5. Run the command `python manage.py runserver` and have fun.
