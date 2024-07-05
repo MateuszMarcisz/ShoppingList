@@ -7,8 +7,8 @@ Let's see what has been done so far.
 
 ## Backend
 ### Technologies:
-- **Framework:** Django
-- **Language:** Python
+- **Framework:** Django (REST framework)
+- **Language:** Python (3.12)
 - **Database:** PostgreSQL
 - **Serialization to:** JSON
 - **Other**: Postman, pytest/pytest-django, venv
@@ -33,9 +33,10 @@ TBD
 <i>Note: All endpoints require the user to be logged in (except for registration and login), so you need to use either curl or Postman to interact with them.</i>
 
 1. Clone the repository.
-2. Change `.env.example` name to `.env` and make needed adjustments.
-3. Set up your DB.
-4. Run the command `python manage.py runserver` and have fun.
+2. Set up virtual environment `python venv .venv` and install dependencies `pip install -r requirements.txt`.
+3. Change `.env.example` name to `.env` and make needed adjustments.
+4. Set up your DB.
+5. Run the command `python manage.py runserver` and have fun.
 
 ## License
 You are free to use, modify, and distribute this application for your private, personal use.
