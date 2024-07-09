@@ -1,27 +1,11 @@
 import React from 'react';
-import {BrowserRouter as Router, Routes, Route, Link, useNavigate} from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {AuthProvider} from './contexts/AuthContext';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import ShoppingList from './components/ShoppingList/ShoppingList';
-import Logout from "./components/Auth/Logout";
+import Navigation from "./components/ShoppingList/Navigation";
 
-function Navigation() {
-    const navigate = useNavigate();
-
-    return (
-        <nav>
-            <div>
-                <button onClick={() => navigate('/')}>Home</button>
-            </div>
-            <div>
-                <button onClick={() => navigate('/register')}>Register</button>
-                <button onClick={() => navigate('/login')}>Login</button>
-                <Logout/>
-            </div>
-        </nav>
-    );
-}
 
 function App() {
     return (
