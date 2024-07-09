@@ -1,4 +1,7 @@
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.shortcuts import render
+from django.utils.decorators import method_decorator
 from rest_framework import status, authentication, permissions
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -35,3 +38,13 @@ class UserLogoutAPIView(APIView):
     def post(self, request):
         request.user.auth_token.delete()
         return Response(status=status.HTTP_200_OK)
+
+
+class CurrentUserAPIView(APIView):
+    @method_decorator(login_required)
+    def get(self, request):
+        user = request.user
+        return JsonResponse({
+            'username': user.username,
+
+        })
