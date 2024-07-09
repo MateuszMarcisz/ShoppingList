@@ -3,14 +3,14 @@ import { AuthContext } from '../../contexts/AuthContext';
 
 const Register = () => {
     const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
+    // const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const { register } = useContext(AuthContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await register(username, email, password);
+            await register(username, password);
             // Redirect to shopping list page
         } catch (error) {
             console.error('Registration failed', error);
@@ -25,12 +25,12 @@ const Register = () => {
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Username"
             />
-            <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
-            />
+            {/*<input*/}
+            {/*    type="email"*/}
+            {/*    value={email}*/}
+            {/*    onChange={(e) => setEmail(e.target.value)}*/}
+            {/*    placeholder="Email"*/}
+            {/*/>*/}
             <input
                 type="password"
                 value={password}
