@@ -62,16 +62,23 @@ const AuthContext = createContext({});
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
-    useEffect(() => {
-        // Check if user is logged in
-        const token = localStorage.getItem('token');
-        if (token) {
-            axios.defaults.headers.common['Authorization'] = `Token ${token}`;
-            axios.get('/accounts/current_user/')
-                .then(response => setUser(response.data))
-                .catch(() => localStorage.removeItem('token'));
-        }
-    }, []);
+useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+        axios.defaults.headers.common['Authorization'] = `Token ${token}`;
+        axios.get('/accounts/current_user/')
+            .then(response => {
+                setUser(response.data);
+            })
+            .catch(() => {
+                localStorage.removeItem('token');
+                setUser(null); // Set user to null if token is invalid
+            });
+    } else {
+        setUser(null); // Set user to null if no token is present
+    }
+}, [user]); // Depend on user state changes
+
 
     const login = (username, password) => {
         return axios.post('/accounts/login/', { username, password })
