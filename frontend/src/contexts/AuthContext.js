@@ -26,8 +26,8 @@ const AuthProvider = ({ children }) => {
             });
     };
 
-    const register = (username, email, password) => {
-        return axios.post('/accounts/register/', { username, email, password })
+    const register = (username, password) => {
+        return axios.post('/accounts/register/', { username, password })
             .then(response => {
                 localStorage.setItem('token', response.data.token);
                 axios.defaults.headers.common['Authorization'] = `Token ${response.data.token}`;
