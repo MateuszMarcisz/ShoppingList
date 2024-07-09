@@ -26,7 +26,7 @@ body {
   padding: 1rem 0.5rem;
 }
 
-.RegistrationForm {
+.Registration {
     width: 100%;
     max-width: 420px;
     min-height: 400px;
@@ -39,7 +39,7 @@ body {
     /*margin-top: 5rem;*/
 }
 
-form {
+.RegistrationForm {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -113,4 +113,33 @@ button {
 
 .line {
     display: inline-block;
+}
+
+/* NAV */
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    background-color: yellowgreen;
+    border-bottom: 2px solid black;
+}
+
+
+nav button {
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    margin: 0 0.5rem;
+    font-size: 1rem;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+}
+
+nav button:hover {
+    background-color: #0056b3;
+    text-decoration: none;
 }
