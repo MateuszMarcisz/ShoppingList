@@ -44,12 +44,11 @@
 //
 // export default Register;
 
-import React, {useState, useContext, useRef} from 'react';
+import React, {useState, useContext, useRef, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {AuthContext} from '../../contexts/AuthContext';
 import {faCheck, faTimes, faInfoCircle} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import axios from '../../api/axios';
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -79,6 +78,14 @@ const Register = () => {
 
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
+
+    useEffect(() => {
+        userRef.current.focus();
+    }, [])
+
+    useEffect(() => {
+        setErrMsg('');
+    }, [username, password, confirmPassword])
 
     const handleUsernameChange = (e) => {
         setUsername(e.target.value);
@@ -110,16 +117,22 @@ const Register = () => {
             setPassword('');
             setConfirmPassword('');
         } catch (err) {
-            if (!err.response) {
-                setErrMsg('No Server Response');
-            } else if (err.response.status === 409) {
-                setErrMsg('Username Taken');
+        if (!err.response) {
+            setErrMsg('No Server Response');
+        } else if (err.response.status === 400) {
+            const errorData = err.response.data;
+            console.log(errorData)
+            if (errorData && errorData.username) {
+                setErrMsg(errorData.username[0]);
             } else {
-                setErrMsg('Registration Failed');
+                setErrMsg('Registration Failed: Bad Request');
             }
-            errRef.current.focus();
+        } else {
+            setErrMsg('Registration Failed');
         }
-    };
+        errRef.current.focus();
+    }
+};
 
     const handleSignInClick = () => {
         navigate('/login');
@@ -129,16 +142,18 @@ const Register = () => {
         <>
             {success ? (
                 <section className="Registration">
-                    <h1>You have successfully registered!</h1>
-                    <p> Now Sign In to use the App: </p>
-                    <p>
-                        <a href="#" onClick={handleSignInClick}>Sign In</a>
-                    </p>
+                    <div className="center-text">
+                        <h1>You have successfully registered!</h1>
+                        <p> Now Sign In to use the App: </p>
+                        <p>
+                            <button className="signin-button" onClick={handleSignInClick}>Sign In</button>
+                        </p>
+                    </div>
                 </section>
             ) : (
                 <section className="Registration">
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <h1>Register</h1>
+                    <h1 className="center-text">Register</h1>
                     <form className="RegistrationForm" onSubmit={handleSubmit}>
                         <label htmlFor="username">
                             Username:
@@ -220,10 +235,10 @@ const Register = () => {
 
                         <button disabled={!validUsername || !validPassword || !validConfirmPassword}>Sign Up</button>
                     </form>
-                    <p>
+                    <p className="center-text">
                         Already registered?<br/>
                         <span className="line">
-                            <a href="#" onClick={handleSignInClick}>Sign In</a>
+                            <button className="signin-button" onClick={handleSignInClick}>Sign In</button>
                         </span>
                     </p>
                 </section>
