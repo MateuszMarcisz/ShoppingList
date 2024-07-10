@@ -103,7 +103,7 @@ const AuthProvider = ({children}) => {
             // axios.defaults.headers.common['Authorization'] = `Token ${response.data.token}`;
         } catch (error) {
             console.error('Registration failed', error);
-            // Handle registration failure if needed
+            throw error
         }
     };
 
