@@ -60,7 +60,7 @@ const AuthContext = createContext({});
 
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
-    const [isAuthenticated, setIsAuthenticated] = useState(false); // New state variable
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -69,25 +69,30 @@ const AuthProvider = ({children}) => {
             axios.get('/accounts/current_user/')
                 .then(response => {
                     setUser(response.data);
-                    setIsAuthenticated(true); // Set isAuthenticated to true
+                    setIsAuthenticated(true);
                 })
                 .catch(() => {
                     localStorage.removeItem('token');
                     setUser(null);
-                    setIsAuthenticated(false); // Set isAuthenticated to false
+                    setIsAuthenticated(false);
                 });
         } else {
             setUser(null);
-            setIsAuthenticated(false); // Set isAuthenticated to false
+            setIsAuthenticated(false);
         }
-    }, []);
+    }, [isAuthenticated]);
 
     const login = async (username, password) => {
         const response = await axios.post('/accounts/login/', {username, password});
         localStorage.setItem('token', response.data.token);
         axios.defaults.headers.common['Authorization'] = `Token ${response.data.token}`;
-        setUser(response.data.user);
-        setIsAuthenticated(true); // Set isAuthenticated to true
+        const userResponse = await axios.get('/accounts/current_user/');
+        console.log(userResponse.data.username);
+        const loggedUser = userResponse.data.username;
+        setUser(loggedUser);
+        // setUser(response.data.user);
+        // console.log(response.data.user);
+        setIsAuthenticated(true);
     };
 
     const register = async (username, password) => {
@@ -107,7 +112,7 @@ const AuthProvider = ({children}) => {
         localStorage.removeItem('token');
         delete axios.defaults.headers.common['Authorization'];
         setUser(null);
-        setIsAuthenticated(false); // Set isAuthenticated to false
+        setIsAuthenticated(false);
     };
 
     return (

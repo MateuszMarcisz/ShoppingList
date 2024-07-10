@@ -4,7 +4,7 @@ import {AuthContext} from '../../contexts/AuthContext';
 
 const Navigation = () => {
     const navigate = useNavigate();
-    const {isAuthenticated, logout} = useContext(AuthContext); // Use isAuthenticated
+    const {isAuthenticated, user, logout} = useContext(AuthContext);
 
     const handleLogout = async () => {
         try {
@@ -22,10 +22,13 @@ const Navigation = () => {
             </div>
             <div>
                 {isAuthenticated ? (
-                    <button onClick={handleLogout}>Logout</button>
+                    <>
+                        <button>Hello, {user.username}</button>
+                        <button onClick={handleLogout}>Logout</button>
+                    </>
                 ) : (
                     <>
-                        <button onClick={() => navigate('/register')}>Register</button>
+                    <button onClick={() => navigate('/register')}>Register</button>
                         <button onClick={() => navigate('/login')}>Login</button>
                     </>
                 )}
