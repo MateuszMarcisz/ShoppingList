@@ -8,7 +8,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const {login} = useContext(AuthContext);
     const navigate = useNavigate();
-    const [error, setError] = useState(null);
+    // const [error, setError] = useState(null);
     const userRef = useRef();
     const errRef = useRef();
     const [errMsg, setErrMsg] = useState('');
@@ -74,7 +74,7 @@ const Login = () => {
                         <br/>
                         Do not have account?<br/>
                         <span className="line">
-                            <button className="signin-button" onClick={handleRegisterClick}>Sign In</button>
+                            <button className="signin-button" onClick={handleRegisterClick}>Register</button>
                         </span>
                     </p>
                 </form>

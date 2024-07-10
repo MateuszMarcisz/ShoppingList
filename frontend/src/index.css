@@ -39,7 +39,6 @@ body {
     margin-top: 5rem;
     border: 0.25rem solid black;
     border-radius: 5px;
-
 }
 
 .RegistrationForm {
@@ -153,4 +152,28 @@ nav button:hover {
 
 .center-text {
     text-align: center;
+}
+
+/* Lists style*/
+
+.Lists {
+    width: 100%;
+    max-width: 600px;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    margin: auto;
+    border: 0.25rem solid black;
+    border-radius: 5px;
+}
+
+table td {
+    text-align: center;
+}
+
+.Thrash {
+    color: red;
 }
