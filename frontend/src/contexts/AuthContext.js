@@ -62,6 +62,7 @@ const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
@@ -79,6 +80,7 @@ const AuthProvider = ({children}) => {
         } else {
             setUser(null);
             setIsAuthenticated(false);
+
         }
     }, [isAuthenticated]);
 
@@ -87,8 +89,8 @@ const AuthProvider = ({children}) => {
         localStorage.setItem('token', response.data.token);
         axios.defaults.headers.common['Authorization'] = `Token ${response.data.token}`;
         const userResponse = await axios.get('/accounts/current_user/');
-        console.log(userResponse.data.username);
-        const loggedUser = userResponse.data.username;
+        console.log(userResponse.data);
+        const loggedUser = userResponse.data;
         setUser(loggedUser);
         // setUser(response.data.user);
         // console.log(response.data.user);
