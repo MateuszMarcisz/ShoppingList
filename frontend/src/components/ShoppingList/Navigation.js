@@ -1,11 +1,10 @@
-// Navigation.js
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 
 const Navigation = () => {
     const navigate = useNavigate();
-    const { user, logout } = useContext(AuthContext);
+    const { isAuthenticated, logout } = useContext(AuthContext); // Use isAuthenticated
 
     const handleLogout = async () => {
         try {
@@ -22,7 +21,7 @@ const Navigation = () => {
                 <button onClick={() => navigate('/')}>Home</button>
             </div>
             <div>
-                {user ? (
+                {isAuthenticated ? (
                     <button onClick={handleLogout}>Logout</button>
                 ) : (
                     <>
