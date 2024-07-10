@@ -129,7 +129,8 @@ const Register = () => {
         <>
             {success ? (
                 <section className="Registration">
-                    <h1>Success!</h1>
+                    <h1>You have successfully registered!</h1>
+                    <p> Now Sign In to use the App: </p>
                     <p>
                         <a href="#" onClick={handleSignInClick}>Sign In</a>
                     </p>
@@ -222,7 +223,6 @@ const Register = () => {
                     <p>
                         Already registered?<br/>
                         <span className="line">
-                            {/* Put router link here */}
                             <a href="#" onClick={handleSignInClick}>Sign In</a>
                         </span>
                     </p>

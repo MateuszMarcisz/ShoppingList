@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthContext';
+import React, {useContext} from 'react';
+import {useNavigate} from 'react-router-dom';
+import {AuthContext} from '../../contexts/AuthContext';
 
 const Navigation = () => {
     const navigate = useNavigate();
-    const { isAuthenticated, logout } = useContext(AuthContext); // Use isAuthenticated
+    const {isAuthenticated, logout} = useContext(AuthContext); // Use isAuthenticated
 
     const handleLogout = async () => {
         try {
