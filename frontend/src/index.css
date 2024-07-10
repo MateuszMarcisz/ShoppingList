@@ -177,3 +177,89 @@ table td {
 .Thrash {
     color: red;
 }
+
+.bottom {
+    margin-top: auto;
+}
+
+.size50 {
+    font-size: 50px;
+}
+
+.reset {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.icon-button {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; /* Change cursor to pointer */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.icon-button:hover {
+    background-color: #0056b3; /* Darker background color on hover */
+}
+
+.icon-button:focus {
+    outline: none; /* Remove focus outline */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Optional: add focus ring */
+}
+
+.thin-input {
+    width: 80px;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px; /* Adjust as needed */
+}
+
+.form-container form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.form-container input[type="text"]{
+    flex: 1; /* Allow inputs to grow and fill available space */
+    height: 50px; /* Set a consistent height */
+    padding: 5px; /* Adjust padding as needed */
+    font-size: 16px; /* Ensure font size is consistent */
+    border: 1px solid #ccc; /* Border style */
+    border-radius: 2px; /* Rounded corners */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+
+input[type="text"],
+input[type="number"] {
+    height: 50px; /* Set a consistent height */
+    padding: 5px; /* Optional: Adjust padding as needed */
+    font-size: 16px; /* Ensure font size is consistent */
+    border: 1px solid #ccc; /* Border style */
+    border-radius: 2px; /* Rounded corners */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+input[type="number"] {
+    -moz-appearance: textfield; /* Firefox: Hide default spinner */
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* Chrome, Safari, Edge, Opera: Hide default spinner */
+    margin: 0;
+}
