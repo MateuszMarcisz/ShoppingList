@@ -45,6 +45,6 @@ class CurrentUserAPIView(APIView):
     def get(self, request):
         user = request.user
         return JsonResponse({
+            'id': user.id,
             'username': user.username,
-
         })
