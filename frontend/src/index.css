@@ -128,7 +128,8 @@ nav {
     justify-content: space-around;
     background-color: peru;
     border-bottom: 2px solid black;
-}
+    padding: 0 27%;
+ }
 
 
 nav button {
@@ -323,10 +324,23 @@ input[type="number"]::-webkit-inner-spin-button {
 
 tr.purchased {
     background-color: grey;
+    position: relative; /* Allow absolute positioning of ::after */
+}
+
+tr.purchased::after {
+    content: '';
+    position: absolute;
+    top: 50%; /* Vertically center the line */
+    left: 0;
+    width: 100%; /* Entire width of the row */
+    height: 2px; /* Thickness */
+    background-color: black; /* Color of the line */
+    transform: translateY(-50%); /*  Centering */
 }
 
 .purchased td {
-    text-decoration: line-through;
+    position: relative;
+    z-index: 1; /* Ensure text is above the line */
 }
 
 .width120 {

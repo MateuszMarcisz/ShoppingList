@@ -107,7 +107,7 @@ const IndividualShoppingList = () => {
 
     return (
         <div className="Lists">
-            <h2 className="center-text">{shoppingList.name}</h2>
+            <h1 className="center-text">{shoppingList.name}</h1>
             <div className="form-container">
                 <form onSubmit={handleAddItem}>
                     <label htmlFor="addItem" className="sr-only">Add Item</label>

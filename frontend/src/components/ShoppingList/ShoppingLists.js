@@ -2,6 +2,8 @@ import React, {useContext, useState, useEffect} from 'react';
 import axios from '../../api/axios';
 import {AuthContext} from '../../contexts/AuthContext';
 import {Link, useNavigate} from 'react-router-dom';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faPlus} from "@fortawesome/free-solid-svg-icons";
 
 
 const ShoppingList = () => {
@@ -10,6 +12,7 @@ const ShoppingList = () => {
     const [loading, setLoading] = useState(true);
     const {user} = useContext(AuthContext);
     const navigate = useNavigate();
+    const [newListName, setNewListName] = useState('');
 
 
     useEffect(() => {
@@ -26,6 +29,25 @@ const ShoppingList = () => {
         }
     }, [isAuthenticated]);
 
+    const handleAddList = async (e) => {
+        e.preventDefault();
+        if (!newListName) return;
+
+        try {
+            const response = await axios.post(`/shoppinglists/`, {
+                name: newListName,
+                user: user.id,
+            });
+            setShoppingLists(prevLists => [...prevLists, response.data]);
+            setNewListName('');
+        } catch (error) {
+                        console.log(user);
+            console.error('Error adding list:', error);
+            // Optionally add user-friendly error handling here
+        }
+    };
+
+
     if (!user) {
         return (
             <div className="center-text">
@@ -40,7 +62,26 @@ const ShoppingList = () => {
 
     return (
         <div className="Lists">
-            <h2 className="center-text">Shopping Lists</h2>
+            <h1 className="center-text">Shopping Lists</h1>
+
+            <div className="form-container top-margin50">
+                <form onSubmit={handleAddList}>
+                    <label htmlFor="addItem" className="sr-only">Add Item</label>
+                    <input
+                        id='addItem'
+                        type='text'
+                        placeholder='Add New Shopping List'
+                        value={newListName}
+                        onChange={(e) => setNewListName(e.target.value)}
+                        required
+                        aria-label="List name"
+                    />
+                    <button type="submit" className="icon-button">
+                        <FontAwesomeIcon icon={faPlus}/>
+                    </button>
+                </form>
+            </div>
+
             {shoppingLists.length === 0 ? (
                 <p>No shopping lists found.</p>
             ) : (
