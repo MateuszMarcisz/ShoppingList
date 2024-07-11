@@ -23,7 +23,7 @@ const Navigation = () => {
             <div>
                 {isAuthenticated ? (
                     <>
-                        <button>Hello, {user.username}</button>
+                        <button className="hello">Hello, {user.username}!</button>
                         <button onClick={handleLogout}>Logout</button>
                     </>
                 ) : (
