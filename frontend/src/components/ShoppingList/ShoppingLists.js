@@ -27,10 +27,10 @@ const ShoppingList = () => {
     }, [isAuthenticated]);
 
     if (!user) {
-        return(
-        <div className="center-text">
-        <h1>Looks like you are not logged in.</h1>
-        <button onClick={() => navigate('/login')}>Login</button>
+        return (
+            <div className="center-text">
+                <h1>Looks like you are not logged in.</h1>
+                <button onClick={() => navigate('/login')}>Login</button>
             </div>)
     }
 
@@ -44,12 +44,16 @@ const ShoppingList = () => {
             {shoppingLists.length === 0 ? (
                 <p>No shopping lists found.</p>
             ) : (
-                <ul>
+                <ul style={{listStyleType: 'none', padding: 0}}>
                     {shoppingLists.map(list => (
-                        <ul key={list.id}>
-                            <Link to={`/shoppinglist/${list.id}`}>{list.name}</Link>
-                            {/* You can customize the display of each shopping list item */}
-                        </ul>
+                        <li key={list.id} style={{marginBottom: '10px'}}>
+                            <button
+                                className="lists-link-button"
+                                onClick={() => navigate(`/shoppinglist/${list.id}`)}
+                            >
+                                {list.name}
+                            </button>
+                        </li>
                     ))}
                 </ul>
             )}
