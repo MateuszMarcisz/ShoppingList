@@ -360,4 +360,6 @@ tr.purchased::after {
     background-color: rgba(244, 164, 96, 0.4);
 }
 
-
+.right-margin0 {
+    margin-right: 0;
+}

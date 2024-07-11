@@ -4,6 +4,7 @@ import {AuthContext} from '../../contexts/AuthContext';
 import {Link, useNavigate} from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
+import {FaTrashAlt} from "react-icons/fa";
 
 
 const ShoppingList = () => {
@@ -41,11 +42,22 @@ const ShoppingList = () => {
             setShoppingLists(prevLists => [...prevLists, response.data]);
             setNewListName('');
         } catch (error) {
-                        console.log(user);
+            console.log(user);
             console.error('Error adding list:', error);
-            // Optionally add user-friendly error handling here
+            //  Add later user-friendly error handling here
         }
     };
+
+        const handleDeleteList = async (listId) => {
+        try {
+            await axios.delete(`/shoppinglists/${listId}/`);
+            setShoppingLists(prevLists => prevLists.filter(list => list.id !== listId));
+        } catch (error) {
+            console.error('Error deleting list:', error);
+            // Add later user-friendly error handling here
+        }
+    };
+
 
 
     if (!user) {
@@ -87,13 +99,19 @@ const ShoppingList = () => {
             ) : (
                 <ul style={{listStyleType: 'none', padding: 0}}>
                     {shoppingLists.map(list => (
-                        <li key={list.id} style={{marginBottom: '10px'}}>
+                        <li key={list.id} style={{marginBottom: '10px', position: 'relative'}}>
                             <button
                                 className="lists-link-button"
                                 onClick={() => navigate(`/shoppinglist/${list.id}`)}
                             >
                                 {list.name}
                             </button>
+                            <FaTrashAlt
+                                className="Thrash right-margin0"
+                                aria-label={`Delete ${list.name}`}
+                                onClick={() => handleDeleteList(list.id)}
+                                style={{position: 'absolute', right: '10px', top: '50%', fontSize: '1.2rem' }}
+                            />
                         </li>
                     ))}
                 </ul>

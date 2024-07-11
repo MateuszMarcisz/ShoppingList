@@ -161,11 +161,13 @@ const IndividualShoppingList = () => {
                                 aria-label={`Mark ${item.name} as purchased`}
                             />
                         </td>
-                        <td><FaTrashAlt
-                            className="Thrash"
-                            aria-label={`Delete ${item.name}`}
-                            onClick={() => handleDeleteItem(item.id)}
-                        /></td>
+                        <td>
+                            <FaTrashAlt
+                                className="Thrash"
+                                aria-label={`Delete ${item.name}`}
+                                onClick={() => handleDeleteItem(item.id)}
+                            />
+                        </td>
                     </tr>
                 ))}
                 </tbody>
