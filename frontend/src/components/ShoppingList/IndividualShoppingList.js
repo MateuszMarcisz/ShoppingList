@@ -1,7 +1,7 @@
-import React, {useState, useEffect, useContext} from 'react';
-import axios from '../../api/axios';
+import React, {useEffect, useContext} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
 import {AuthContext} from '../../contexts/AuthContext';
+import {ShoppingListContext} from '../../contexts/ShoppingListContext';
 import {FaTrashAlt} from 'react-icons/fa';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPlus} from '@fortawesome/free-solid-svg-icons';
@@ -9,79 +9,35 @@ import {faPlus} from '@fortawesome/free-solid-svg-icons';
 const IndividualShoppingList = () => {
     const {id} = useParams();
     const {isAuthenticated} = useContext(AuthContext);
-    const [shoppingList, setShoppingList] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [newItemName, setNewItemName] = useState('');
-    const [newItemQuantity, setNewItemQuantity] = useState('');
+    const {
+        shoppingList,
+        fetchShoppingList,
+        newItemName,
+        setNewItemName,
+        newItemQuantity,
+        setNewItemQuantity,
+        addItem,
+        deleteItem,
+        togglePurchased,
+        loading,
+        setLoading,
+        error,
+        setError
+    } = useContext(ShoppingListContext);
     const navigate = useNavigate();
 
     useEffect(() => {
         if (isAuthenticated) {
-            axios.get(`/shoppinglists/${id}/`)
-                .then(response => {
-                    setShoppingList(response.data);
-                    setLoading(false);
-                })
-                .catch(error => {
-                    console.error('Error fetching shopping list:', error);
-                    setError('Error fetching shopping list');
-                    setLoading(false);
-                });
+            fetchShoppingList(id);
         } else {
             setLoading(false);
         }
-    }, [isAuthenticated, id]);
+    }, [isAuthenticated, id, setLoading]);
 
     const handleAddItem = async (e) => {
         e.preventDefault();
-        if (!newItemName || !newItemQuantity) return;
-
-        try {
-            const response = await axios.post(`/items/`, {
-                name: newItemName,
-                quantity: newItemQuantity,
-                shopping_list: id
-            });
-            setShoppingList(prevList => ({
-                ...prevList,
-                items: [...prevList.items, response.data]
-            }));
-            setNewItemName('');
-            setNewItemQuantity('');
-        } catch (error) {
-            console.error('Error adding item:', error);
-        }
+        await addItem(id, newItemName, newItemQuantity);
     };
-
-    const handleDeleteItem = async (itemId) => {
-        try {
-            await axios.delete(`/items/${itemId}/`);
-            setShoppingList(prevList => ({
-                ...prevList,
-                items: prevList.items.filter(item => item.id !== itemId)
-            }));
-        } catch (error) {
-            console.error('Error deleting item:', error);
-        }
-    };
-
-    const handleTogglePurchased = async (itemId, currentStatus) => {
-        try {
-            const response = await axios.patch(`/items/${itemId}/`, {
-                purchased: !currentStatus
-            });
-            setShoppingList(prevList => ({
-                ...prevList,
-                items: prevList.items.map(item =>
-                    item.id === itemId ? response.data : item
-                )
-            }));
-        } catch (error) {
-            console.error('Error updating item:', error);
-        }
-    };
-
 
     if (!isAuthenticated) {
         return (
@@ -103,6 +59,8 @@ const IndividualShoppingList = () => {
     if (!shoppingList) {
         return <p>Shopping list not found.</p>;
     }
+
+    const sortedItems = shoppingList.items.slice().sort((a, b) => {return a.id - b.id;});
 
     return (
         <div className="Lists">
@@ -148,7 +106,7 @@ const IndividualShoppingList = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {shoppingList.items.map(item => (
+                {sortedItems.map(item => (
                     <tr key={item.id} className={item.purchased ? 'purchased' : ''}>
                         <td>{item.name}</td>
                         <td className="width120">{item.quantity}</td>
@@ -157,7 +115,7 @@ const IndividualShoppingList = () => {
                                 className="width120"
                                 type="checkbox"
                                 checked={item.purchased}
-                                onChange={() => handleTogglePurchased(item.id, item.purchased)}
+                                onChange={() => togglePurchased(item.id, item.purchased)}
                                 aria-label={`Mark ${item.name} as purchased`}
                             />
                         </td>
@@ -165,7 +123,7 @@ const IndividualShoppingList = () => {
                             <FaTrashAlt
                                 className="Thrash width120"
                                 aria-label={`Delete ${item.name}`}
-                                onClick={() => handleDeleteItem(item.id)}
+                                onClick={() => deleteItem(item.id)}
                             />
                         </td>
                     </tr>

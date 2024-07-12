@@ -1,10 +1,8 @@
-// src/contexts/ShoppingListContext.js
-
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import axios from '../api/axios';
 import { AuthContext } from './AuthContext';
 
-const ShoppingListContext = createContext();
+const ShoppingListContext = createContext({});
 
 const ShoppingListProvider = ({ children }) => {
     const { isAuthenticated, user } = useContext(AuthContext);
@@ -12,6 +10,9 @@ const ShoppingListProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [newListName, setNewListName] = useState('');
     const [error, setError] = useState('');
+    const [shoppingList, setShoppingList] = useState(null);
+    const [newItemName, setNewItemName] = useState('');
+    const [newItemQuantity, setNewItemQuantity] = useState('');
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -54,8 +55,88 @@ const ShoppingListProvider = ({ children }) => {
         }
     };
 
+    const fetchShoppingList = async (id) => {
+        try {
+            const response = await axios.get(`/shoppinglists/${id}/`);
+            setShoppingList(response.data);
+            setLoading(false);
+        } catch (error) {
+            console.error('Error fetching shopping list:', error);
+            setError('Error fetching shopping list');
+            setLoading(false);
+        }
+    };
+
+    const addItem = async (id, newItemName, newItemQuantity) => {
+        if (!newItemName || !newItemQuantity) return;
+
+        try {
+            const response = await axios.post(`/items/`, {
+                name: newItemName,
+                quantity: newItemQuantity,
+                shopping_list: id
+            });
+            setShoppingList(prevList => ({
+                ...prevList,
+                items: [...prevList.items, response.data]
+            }));
+            setNewItemName('');
+            setNewItemQuantity('');
+        } catch (error) {
+            console.error('Error adding item:', error);
+        }
+    };
+
+    const deleteItem = async (itemId) => {
+        try {
+            await axios.delete(`/items/${itemId}/`);
+            setShoppingList(prevList => ({
+                ...prevList,
+                items: prevList.items.filter(item => item.id !== itemId)
+            }));
+        } catch (error) {
+            console.error('Error deleting item:', error);
+        }
+    };
+
+    const togglePurchased = async (itemId, currentStatus) => {
+        try {
+            const response = await axios.patch(`/items/${itemId}/`, {
+                purchased: !currentStatus
+            });
+            setShoppingList(prevList => ({
+                ...prevList,
+                items: prevList.items.map(item =>
+                    item.id === itemId ? response.data : item
+                )
+            }));
+        } catch (error) {
+            console.error('Error updating item:', error);
+        }
+    };
+
     return (
-        <ShoppingListContext.Provider value={{ shoppingLists, loading, newListName, setNewListName, addList, deleteList }}>
+        <ShoppingListContext.Provider value={{
+            shoppingLists,
+            loading,
+            setLoading,
+            newListName,
+            setNewListName,
+            addList,
+            deleteList,
+            shoppingList,
+            setShoppingList,
+            fetchShoppingList,
+            newItemName,
+            setNewItemName,
+            newItemQuantity,
+            setNewItemQuantity,
+            addItem,
+            deleteItem,
+            togglePurchased,
+            error,
+            setError
+        }}>
             {children}
         </ShoppingListContext.Provider>
     );

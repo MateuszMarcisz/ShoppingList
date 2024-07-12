@@ -123,7 +123,6 @@
 // export default ShoppingList;
 //
 
-// src/components/shoppingList/ShoppingList.js
 
 import React, { useContext } from 'react';
 import { ShoppingListContext } from '../../contexts/ShoppingListContext';
