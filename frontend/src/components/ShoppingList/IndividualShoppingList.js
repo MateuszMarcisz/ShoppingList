@@ -115,6 +115,7 @@ const IndividualShoppingList = () => {
                         id='addItem'
                         type='text'
                         placeholder='Add Item'
+                        maxLength={100}
                         value={newItemName}
                         onChange={(e) => setNewItemName(e.target.value)}
                         required
@@ -144,7 +145,7 @@ const IndividualShoppingList = () => {
                     <th>Item</th>
                     <th className="width120">Quantity</th>
                     <th className="width120">Purchased</th>
-                    <th>Delete</th>
+                    <th className="width120">Delete</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -163,7 +164,7 @@ const IndividualShoppingList = () => {
                         </td>
                         <td>
                             <FaTrashAlt
-                                className="Thrash"
+                                className="Thrash width120"
                                 aria-label={`Delete ${item.name}`}
                                 onClick={() => handleDeleteItem(item.id)}
                             />
