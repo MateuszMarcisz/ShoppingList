@@ -34,7 +34,7 @@ const AuthProvider = ({children}) => {
         localStorage.setItem('token', response.data.token);
         axios.defaults.headers.common['Authorization'] = `Token ${response.data.token}`;
         const userResponse = await axios.get('/accounts/current_user/');
-        console.log(userResponse.data);
+        // console.log(userResponse.data);
         const loggedUser = userResponse.data;
         setUser(loggedUser);
         // setUser(response.data.user);

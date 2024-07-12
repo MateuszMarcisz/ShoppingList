@@ -33,6 +33,7 @@ const Login = () => {
                 setErrMsg('No Server Response');
             } else if (error.response?.status === 400) {
                 setErrMsg('Wrong Credentials');
+                setPassword('')
             } else {
                 setErrMsg('Login Failed');
             }
