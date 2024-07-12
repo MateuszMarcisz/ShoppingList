@@ -6,10 +6,12 @@ import Register from './components/Auth/Register';
 import ShoppingLists from './components/ShoppingList/ShoppingLists';
 import Navigation from './components/ShoppingList/Navigation';
 import IndividualShoppingList from "./components/ShoppingList/IndividualShoppingList";
+import {ShoppingListProvider} from "./contexts/ShoppingListContext";
 
 function App() {
     return (
         <AuthProvider>
+            <ShoppingListProvider>
             <Router>
                 <Navigation/>
                 <Routes>
@@ -19,6 +21,7 @@ function App() {
                     <Route path="/shoppinglist/:id" element={<IndividualShoppingList />} />
                 </Routes>
             </Router>
+                </ShoppingListProvider>
         </AuthProvider>
     );
 }

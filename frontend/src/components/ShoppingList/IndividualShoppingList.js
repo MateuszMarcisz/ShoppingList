@@ -4,7 +4,6 @@ import {useParams, useNavigate} from 'react-router-dom';
 import {AuthContext} from '../../contexts/AuthContext';
 import {FaTrashAlt} from 'react-icons/fa';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faSquarePlus} from '@fortawesome/free-solid-svg-icons';
 import {faPlus} from '@fortawesome/free-solid-svg-icons';
 
 const IndividualShoppingList = () => {
