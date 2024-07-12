@@ -83,6 +83,7 @@ const ShoppingList = () => {
                         id='addItem'
                         type='text'
                         placeholder='Add New Shopping List'
+                        maxLength={100}
                         value={newListName}
                         onChange={(e) => setNewListName(e.target.value)}
                         required
