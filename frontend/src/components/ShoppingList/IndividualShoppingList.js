@@ -22,7 +22,6 @@ const IndividualShoppingList = () => {
         loading,
         setLoading,
         error,
-        setError
     } = useContext(ShoppingListContext);
     const navigate = useNavigate();
 
