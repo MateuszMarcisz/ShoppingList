@@ -1,3 +1,5 @@
+<i>*work in progress</i>
+
 <h1 align="center"><strong>Shopping List</strong> project</h1>
 
 ## Description
@@ -19,24 +21,44 @@ Additionally, manual tests were performed using Postman to validate various requ
 
 
 ## Frontend
-Once I learn either React, Angular or Vue I will start working on the Frontend part of the app.
+~~Once I learn either React, Angular or Vue I will start working on the Frontend part of the app.~~ 
+<p>Ok, I have decided to learn React for the start. </p>
 
-### Technologies
-TBD
+### Technologies:
+- **Framework:** React: CRA
+- **Language:** JS (ES6+), HTML (JSX), CSS,
+- **Other**: Axios, React Router, Context API, Font Awesome
 
 ### Tests
-TBD
+TBD soon
+<i>(Most likely Jest)</i>
 
 ## Setup
-<i>This project will be packaged into Docker once both the backend and frontend are complete. For now, to use the backend part, follow the instructions below.</i>
+<i>This project will be packaged into Docker once both the backend and frontend are complete. For now, to use the backend part and most of the frontend, follow the instructions below.</i>
 
 <i>Note: All endpoints require the user to be logged in (except for registration and login), so you need to use either curl or Postman to interact with them.</i>
 
+#### Backend:
 1. Clone the repository.
 2. Set up virtual environment `python -m venv .venv`, activate it `source .venv/bin/activate ` and install dependencies `pip install -r requirements.txt`.
 3. Change `.env.example` name to `.env` and make needed adjustments.
 4. Set up your DB.
-5. Run the command `python manage.py runserver` and have fun.
+5. Run the command `python manage.py runserver` to start backend part.
+
+#### Frontend
+1. Clone the repository.
+2. Run the command  `npm start` to start frontend part and have fun.
+
+
+## Visualisation
+
+List of shopping lists:
+![List of shopping lists visualisation](frontend/src/images/Lists.png)
+
+List of items in the individual shopping list:
+![List of items in the individual shopping list](frontend/src/images/SpecificList.png)
+
+
 
 ## License
 You are free to use, modify, and distribute this application for your private, personal use.
