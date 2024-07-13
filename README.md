@@ -36,7 +36,7 @@ TBD soon
 ## Setup
 <i>This project will be packaged into Docker once both the backend and frontend are complete. For now, to use the backend part and most of the frontend, follow the instructions below.</i>
 
-<i>Note: All endpoints require the user to be logged in (except for registration and login), so you need to use either curl or Postman to interact with them.</i>
+<i>Note: All endpoints require the user to be logged in (except for registration and login), so you need to use either curl or Postman to interact with them without using frontend part.</i>
 
 #### Backend:
 1. Clone the repository.
@@ -47,7 +47,8 @@ TBD soon
 
 #### Frontend
 1. Clone the repository.
-2. Run the command  `npm start` to start frontend part and have fun.
+2. Run the command `npm install` to install dependencies.
+3. Run the command  `npm start` to start frontend part and have fun.
 
 
 ## Visualisation
