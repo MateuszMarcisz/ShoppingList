@@ -1,0 +1,12 @@
+[run]
+branch = True
+source =
+    Accounts
+    ShoppingList
+omit =
+    config/asgi.py
+    config/wsgi.py
+    manage.py
+    */migrations/*
+    */tests/*
+    */__init__.py
