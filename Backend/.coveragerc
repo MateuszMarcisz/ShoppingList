@@ -10,3 +10,8 @@ omit =
     */migrations/*
     */tests/*
     */__init__.py
+    ShoppingList/tests.py
+    Accounts/tests.py
+    config/*
+    Accounts/apps.py
+    SHoppingList/apps.py
