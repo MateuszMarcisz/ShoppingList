@@ -1,4 +1,4 @@
-<i>*work in progress</i>
+<i>*work in progress: frontend tests need to be done</i>
 
 <h1 align="center"><strong>Shopping List</strong> project</h1>
 
@@ -13,11 +13,14 @@ Let's see what has been done so far.
 - **Language:** Python (3.12)
 - **Database:** PostgreSQL
 - **Serialization to:** JSON
-- **Other**: Postman, pytest/pytest-django, venv
+- **Other**: Postman, pytest/pytest-django/pytest-cov, venv
 
 ### Tests
 All the test have been done using pytest/pytest-django. For more information go to `ShoppingList/tests.py` and `ShoppingList/conftest.py` or `Accounts/tests.py` and `Accounts/conftest.py`.
-Additionally, manual tests were performed using Postman to validate various request types on different endpoints.
+Additionally, manual tests were performed using Postman to validate various request types on different endpoints. <br>
+Test coverage report:
+![pytest](Backend/pytest_coverage_backend.png)
+
 
 
 ## Frontend
@@ -34,9 +37,9 @@ TBD soon
 <i>(Most likely Jest)</i>
 
 ## Setup
-<i>This project will be packaged into Docker once both the backend and frontend are complete. For now, to use the backend part and most of the frontend, follow the instructions below.</i>
+<i>This project will be packaged into Docker once both the backend and frontend are complete (frontend tests need to be done). For now, to use it, follow the instructions below.</i>
 
-<i>Note: All endpoints require the user to be logged in (except for registration and login), so you need to use either curl or Postman to interact with them without using frontend part.</i>
+<i>Note: All endpoints require the user to be logged in (except for registration and login).
 
 #### Backend:
 1. Clone the repository.
