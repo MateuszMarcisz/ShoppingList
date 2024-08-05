@@ -145,6 +145,7 @@ const Register = () => {
                         <input
                             type="password"
                             id="password"
+                            data-testid="password-input"
                             ref={pwdRef}
                             value={password}
                             onChange={handlePasswordChange}
@@ -172,6 +173,7 @@ const Register = () => {
                         <input
                             type="password"
                             id="confirm_password"
+                            data-testid="confirm-password-input"
                             ref={confirmPwdRef}
                             value={confirmPassword}
                             onChange={handleConfirmPasswordChange}
