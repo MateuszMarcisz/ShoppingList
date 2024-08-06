@@ -5,7 +5,7 @@ import {AuthContext} from '../../../contexts/AuthContext';
 import Register from '../Register';
 import {BrowserRouter as Router} from 'react-router-dom';
 
-// Mocking useNavigate from react-router-dom
+
 jest.mock('react-router-dom', () => ({
     ...jest.requireActual('react-router-dom'),
     useNavigate: () => jest.fn(),
