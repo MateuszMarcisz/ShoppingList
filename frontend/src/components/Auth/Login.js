@@ -8,7 +8,6 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const {login} = useContext(AuthContext);
     const navigate = useNavigate();
-    // const [error, setError] = useState(null);
     const userRef = useRef();
     const errRef = useRef();
     const [errMsg, setErrMsg] = useState('');
@@ -19,24 +18,29 @@ const Login = () => {
 
     useEffect(() => {
         setErrMsg('');
-    }, [username, password])
+    }, [])
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (username.trim() === '' || password.trim() === '') {
+            setErrMsg('Username and password are required');
+            errRef.current.focus();
+            return;
+        }
         try {
             await login(username, password);
-
             navigate('/');
         } catch (error) {
             if (!error?.response) {
                 setErrMsg('No Server Response');
             } else if (error.response?.status === 400) {
                 setErrMsg('Wrong Credentials');
-                setPassword('')
+
             } else {
                 setErrMsg('Login Failed');
             }
+            setPassword('');
             errRef.current.focus();
         }
     };
@@ -48,7 +52,8 @@ const Login = () => {
     return (
         <>
             <section className="Registration">
-                <p ref={errRef} className={errMsg ? "errmsg center-text" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                <p ref={errRef} className={errMsg ? "errmsg center-text" : "offscreen"}
+                   aria-live="assertive">{errMsg}</p>
                 <h1 className="center-text">Sign In</h1>
                 <form className="RegistrationForm" onSubmit={handleSubmit}>
                     <label htmlFor="Username">Username:</label>
