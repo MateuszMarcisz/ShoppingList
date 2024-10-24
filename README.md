@@ -1,5 +1,3 @@
-<i>*work in progress: frontend tests need to be done</i>
-
 <h1 align="center"><strong>Shopping List</strong> project</h1>
 
 ## Description
@@ -28,18 +26,14 @@ Test coverage report:
 <p>Ok, I have decided to learn React for the start. </p>
 
 ### Technologies:
-- **Framework:** React: CRA
+- **Framework/Library:** React: CRA
 - **Language:** JS (ES6+), HTML (JSX), CSS,
 - **Other**: Axios, React Router, Context API, Font Awesome
 
 ### Tests
-TBD soon
-<i>(Most likely Jest)</i>
+Jest
 
 ## Setup
-<i>This project will be packaged into Docker once both the backend and frontend are complete (frontend tests need to be done). For now, to use it, follow the instructions below.</i>
-
-<i>Note: All endpoints require the user to be logged in (except for registration and login).
 
 #### Backend:
 1. Clone the repository.
